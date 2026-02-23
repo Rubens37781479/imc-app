@@ -7,9 +7,17 @@ export default function App() {
     const [altura, setAltura] = useState<string>("");
     const [imc, setIMC] = useState<number | null>(null);
     const [classicacao, setClassicacao] = useState<string | null>(null);
+    const [mostrarAlerta, setMostrarAlerta] = useState<boolean>(false);
 
     function validarCampos(){
+        if(peso.trim() === "" || altura.trim() === "" || isNaN(Number(peso)) || isNaN(Number(altura))){
+            setMostrarAlerta(true);
+            setIMC(null);
+            return;
+        }
         
+        setMostrarAlerta(false);
+        calculoIMC();
     }
 
     function calculoIMC() {
